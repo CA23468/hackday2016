@@ -163,7 +163,6 @@ function changeText(){
         n++;
         findText();
         writeContent(true);
-        enterControl = true;
     }else if(2<n<8){
         if(document.getElementsByTagName("input")[n-2].value != ""){
             var btn = document.getElementById("btn");
@@ -172,7 +171,6 @@ function changeText(){
         n++;
         findText();
         writeContent(true);
-        enterControl = true;
         }else{
             document.getElementById("btn").innerHTML = "填写完该项才能进行下一项哦";
             setTimeout(function(){

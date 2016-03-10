@@ -122,7 +122,7 @@ window.onload = function(){
             var e = event || window.event;
             var keyCode = e.keyCode || e.which;
             if(keyCode == 13&&enterControl === true){
-
+                enterControl = false;
                 changeText();
             }
     }
