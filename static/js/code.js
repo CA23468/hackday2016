@@ -1,4 +1,4 @@
-
+	var initAppHeight;
     var charIndex = -1;
     var stringLength = 0;
 
@@ -50,10 +50,9 @@
 
     if(n<8){
 
-
         initString = message.innerHTML;
         initString = initString.replace(/<SPAN.*$/gi,"");
-
+		
             var theChar = inputText.charAt(charIndex);
             //检测换行
             var nextFourChars = inputText.substr(charIndex,4);
@@ -109,11 +108,13 @@
            },150);
         }
 
+			window.scrollBy(0,300);
     }
 
 }
 
 window.onload = function(){
+	initAppHeight = document.getElementById('app-container').clientHeight;
     setTimeout(function(){
         enterControl = true;
     },500);
