@@ -105,8 +105,8 @@ function addBlink(){
             var mail= document.getElementsByName("mail")[0].value;
             var resume= document.getElementsByName("resume")[0].value;
 
-			var telReg = new RegExp(/^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/);
-			var mailReg = new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/);
+			var telReg = new RegExp(/^(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/);
+			var mailReg = new RegExp(/^[^\._-][\w\.-]+@([A-Za-z0-9]+\.)+[A-Za-z]+$/);
 			if(!!(name&&tel&&department&&grade&&mail&&resume)){
 				if(!telReg.test(tel)){
 

@@ -4,7 +4,7 @@ from django.db import models
 
 import re
 
-re_tel = re.compile('^1\d{10}$')
+re_tel = re.compile('^(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$')
 re_mail = re.compile('^[^\._-][\w\.-]+@([A-Za-z0-9]+\.)+[A-Za-z]+$')
 
 # Create your models here.
