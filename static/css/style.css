@@ -1,0 +1,87 @@
+*{
+    box-sizing:border-box;
+}
+//字体
+#content {
+    padding: 0;
+    margin: 0;
+    line-height: .3rem;
+	word-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: Courier;
+    color: #aab2bf;
+	font-size: .125rem;
+
+}
+
+//表单
+#content .input {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    color: #20f440;
+    z-index: 2;
+    height:100%;
+}
+
+.textareaDiv{
+	padding: 5px;
+    display: block;
+    border: 2px solid rgb(32, 244, 64);
+    width: 400px;
+	min-height: 200px;
+}
+textarea{
+	background: inherit;
+    border: 0;
+    resize : none;
+    min-height: 200px;
+    width: 100%;
+	color: #20f440;
+	outline:none;
+	padding: 5px;
+}
+
+
+
+.inputBox{
+	position: relative;        margin-bottom: .275rem;    margin-left: 10px;    width: 300px;    border: 2px solid #20f440;    border-radius: 2px;height: .36rem;line-height: .34rem;display: inline-block;
+}
+
+
+input{
+	padding: 3px 5px;border: 0;outline:0;border-radius: 0;box-shadow: none;background: transparent;color: #20f440;z-index: 2;width: 100%;height:100%;
+}
+
+
+@media screen and (max-width: 600px) {
+	.inputBox{
+		margin-left: 0;
+		width: 100%;
+		display: block;
+		
+	}
+	
+	.textareaDiv{
+	    padding: 5px;
+        display: block;
+        border: 2px solid rgb(32, 244, 64);
+        width: 100%;
+		min-height: 200px;
+	
+}
+	
+	
+	textarea{
+	    background: inherit;
+        border: 0;
+        resize : none;
+        min-height: 200px;
+        width: 100%;
+	    color: #20f440;
+}
+}
