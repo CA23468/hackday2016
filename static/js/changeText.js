@@ -1,6 +1,6 @@
 var n = -1;
 var inputText;
-var enterControl = true;
+var enterControl = false;
 
 
 function findText(){
@@ -97,13 +97,35 @@ function addBlink(){
 
     function ajaxRequest()
     {
+		
+            var name= document.getElementsByName("name")[0].value;
+            var tel= document.getElementsByName("tel")[0].value;
+            var department= document.getElementsByName("department")[0].value;
+            var grade= document.getElementsByName("grade")[0].value;
+            var mail= document.getElementsByName("mail")[0].value;
+            var resume= document.getElementsByName("resume")[0].value;
+
+			var telReg = new RegExp(/^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/);
+			var mailReg = new RegExp(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/);
+			if(!!(name&&tel&&department&&grade&&mail&&resume)){
+				if(!telReg.test(tel)){
+
+                	document.getElementById("btn").innerHTML = "请输入正确手机号";
+					return 0;
+				}
+				if(!mailReg.test(mail)){
+
+                	document.getElementById("btn").innerHTML = "请输入正确电子邮件";
+					return 0;
+				}
+
         var data = {
-            name: document.getElementsByName("name")[0].value,
-            tel: document.getElementsByName("tel")[0].value,
-            department: document.getElementsByName("department")[0].value,
-            grade: document.getElementsByName("grade")[0].value,
-            mail: document.getElementsByName("mail")[0].value,
-            resume: document.getElementsByName("resume")[0].value
+            name: name,
+            tel: tel,
+            department: department,
+            grade: grade,
+            mail: mail,
+            resume:resume
         }
 
         ajax.send({
@@ -117,6 +139,10 @@ function addBlink(){
                 document.getElementById("btn").innerHTML = "提交失败";
             },
         });
+			}else{
+
+                document.getElementById("btn").innerHTML = "请填写全部六项";
+			} 
     }
 
 

@@ -114,6 +114,9 @@
 }
 
 window.onload = function(){
+    setTimeout(function(){
+        enterControl = true;
+    },500);
     addBlink();
     document.onkeyup = function (event) {
             var e = event || window.event;
@@ -124,14 +127,12 @@ window.onload = function(){
             }
     }
 
-        document.getElementById("btn").onclick = function(){
-            if(n<8){
-                changeText();
-            };
-            if(n == 8){
-                ajaxRequest();
-            };
-        }
-
-
+    document.getElementById("btn").onclick = function(){
+        if(n<8){
+            changeText();
+        };
+        if(n == 8){
+            ajaxRequest();
+        };
+    }
 }
