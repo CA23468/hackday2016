@@ -4,10 +4,10 @@
 
 
 
-	//样式
-/* 	var inputStyle = " padding: 0;border: 0;border-radius: 0;box-shadow: none;background: transparent;color: #20f440;z-index: 2;width: 100%;" */
+    //样式
+/*  var inputStyle = " padding: 0;border: 0;border-radius: 0;box-shadow: none;background: transparent;color: #20f440;z-index: 2;width: 100%;" */
 
-	var divStyle = "    position: relative;    padding: 2px 5px;    margin-bottom: .275rem;    margin-left: 10px;    width: 300px;    border: 2px solid #20f440;    border-radius: 2px;height: .36rem;line-height: .34rem;display: inline-block;"
+    var divStyle = "    position: relative;    padding: 2px 5px;    margin-bottom: .275rem;    margin-left: 10px;    width: 300px;    border: 2px solid #20f440;    border-radius: 2px;height: .36rem;line-height: .34rem;display: inline-block;"
 
 
 
@@ -17,33 +17,33 @@
         if(charIndex==-1){
             charIndex = 0;
             stringLength = inputText.length;
-			document.getElementById('content').removeChild(document.getElementById("blink"));
+            document.getElementById('content').removeChild(document.getElementById("blink"));
 
 
-			if( n == 0){//简介1
+            if( n == 0){//简介1
 
-			      addDiv(null,null);
-			}else if( n == 1){//简介2
-			      addDiv(null,null);
-			}else if( n == 2){//请求姓名
+                  addDiv(null,null);
+            }else if( n == 1){//简介2
+                  addDiv(null,null);
+            }else if( n == 2){//请求姓名
                 addDiv("div_name","name");
 
-		    }else if( n == 3){//请求电话
+            }else if( n == 3){//请求电话
 
-				addDiv("div_tel","tel");
+                addDiv("div_tel","tel");
 
-			}else if( n == 4){//请求院系
-			    addDiv("div_department","department");
-			}else if( n == 5){//请求年级
-			    addDiv("div_grade","grade");
-			}else if( n == 6){//请求邮箱
-			    addDiv("div_mail","mail");
-			}
-			else if( n == 7){//请求简历
+            }else if( n == 4){//请求院系
+                addDiv("div_department","department");
+            }else if( n == 5){//请求年级
+                addDiv("div_grade","grade");
+            }else if( n == 6){//请求邮箱
+                addDiv("div_mail","mail");
+            }
+            else if( n == 7){//请求简历
 
-				addTextarea("div_resume","resume");
-			}
-		message = document.getElementById('content').getElementsByClassName("message")[n];
+                addTextarea("div_resume","resume");
+            }
+        message = document.getElementById('content').getElementsByClassName("message")[n];
 
 
         }
@@ -52,24 +52,24 @@
 
 
         initString = message.innerHTML;
-		initString = initString.replace(/<SPAN.*$/gi,"");
+        initString = initString.replace(/<SPAN.*$/gi,"");
 
-			var theChar = inputText.charAt(charIndex);
-       	    //检测换行
-			var nextFourChars = inputText.substr(charIndex,4);
-       	    if(nextFourChars=='<BR>' || nextFourChars=='<br>'){
-       		    theChar  = '<BR>';
-       		    charIndex+=3;
+            var theChar = inputText.charAt(charIndex);
+            //检测换行
+            var nextFourChars = inputText.substr(charIndex,4);
+            if(nextFourChars=='<BR>' || nextFourChars=='<br>'){
+                theChar  = '<BR>';
+                charIndex+=3;
 
-       	}
+        }
 
 
         if(charIndex<=stringLength-1){
 
             message.innerHTML = initString + theChar +"<SPAN id='blink'>_</SPAN>";
-		}else{
-			message.innerHTML = initString + theChar ;
-		}
+        }else{
+            message.innerHTML = initString + theChar ;
+        }
 
 
 
@@ -87,26 +87,26 @@
 
         }else{
             enterControl = true;
-			if(n>1){
-				document.getElementsByClassName("inputBox")[n-2].style.display = "inline-block";
-			}
+            if(n>1){
+                document.getElementsByClassName("inputBox")[n-2].style.display = "inline-block";
+            }
 
-		    addBlink();
+            addBlink();
 
-		    charIndex = -1;
+            charIndex = -1;
            setTimeout(function(){
 
-			   //显示按钮
-			   btn.innerHTML = "enter";
-			   btn.style.display = "block";
+               //显示按钮
+               btn.innerHTML = "enter";
+               btn.style.display = "block";
 
-			   //提交
-			   if( n == 7 ){
-				   btn.innerHTML = "提交";
+               //提交
+               if( n == 7 ){
+                   btn.innerHTML = "提交";
 
-				   n = 8;
-			   }
-		   },150);
+                   n = 8;
+               }
+           },150);
         }
 
     }
@@ -114,24 +114,24 @@
 }
 
 window.onload = function(){
-	addBlink();
-	document.onkeyup = function (event) {
+    addBlink();
+    document.onkeyup = function (event) {
             var e = event || window.event;
             var keyCode = e.keyCode || e.which;
-			if(keyCode == 13&&enterControl === true){
+            if(keyCode == 13&&enterControl === true){
 
-				changeText();
-			}
-	}
+                changeText();
+            }
+    }
 
-		document.getElementById("btn").onclick = function(){
-			if(n<8){
-	            changeText();
-	        };
-			if(n == 8){
-	            ajaxRequest();
-		    };
-	    }
+        document.getElementById("btn").onclick = function(){
+            if(n<8){
+                changeText();
+            };
+            if(n == 8){
+                ajaxRequest();
+            };
+        }
 
 
 }
