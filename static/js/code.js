@@ -114,13 +114,20 @@
 }
 
 window.onload = function(){
+	setTimeout(function(){
+		enterControl = true;
+	},500);
 	addBlink();
 	document.onkeyup = function (event) {
             var e = event || window.event;
             var keyCode = e.keyCode || e.which;
 			if(keyCode == 13&&enterControl === true){
-
-				changeText();
+				if(n===8){
+					ajaxRequest();
+				}
+				if(n<8){
+					changeText();
+				}
 			}
 	}
 
