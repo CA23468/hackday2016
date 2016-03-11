@@ -13,4 +13,4 @@ urlpatterns = [
     url(r'^signup/', 'hackday.views.index'),
     url(r'^vote/', include('vote.urls')),
     url(r'^participant/', include('participant.urls')),
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+]
