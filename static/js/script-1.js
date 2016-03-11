@@ -10,7 +10,6 @@ var slide=function(){
 }
 window.onscroll=function(){
     var scrollTop = window.scrollY;
-
     var briefIntroHeight = document.getElementById('brief-intro').clientHeight;
     var realIntroHeight = document.getElementById('real-intro').clientHeight;
     var detailHeight = document.getElementById('detail').clientHeight;
@@ -40,6 +39,43 @@ window.onscroll=function(){
         },900);
     }
 }
+function scrollTo(x,y){
+    var scrollTop = window.scrollY;
+    var distance = y - scrollTop;
+    console.log(distance/Math.abs(distance));
+    var interval = setInterval(function () {
+        var top = window.scrollY;
+        console.log(top);
+        console.log(y);
+        window.scrollBy(0,distance/Math.abs(distance));
+        if (top===y) {
+            clearInterval(interval);
+        }
+    }, 10);
+}
 window.onload = function(){
+    var topoptionA = document.getElementsByClassName('topopA');
+    for (var i = 0; i < topoptionA.length; i++) {
+        topoptionA[i].addEventListener('click',function(){
+            var scrollTop = window.scrollY;
+            var briefIntroHeight = document.getElementById('brief-intro').clientHeight;
+            var realIntroHeight = document.getElementById('real-intro').clientHeight;
+            var detailHeight = document.getElementById('detail').clientHeight;
+            var contactHeight = document.getElementById('contact').clientHeight;
+            var partId = this.getAttribute('href').substr(1,this.getAttribute('href').length);
+            console.log(partId);
+            switch (partId) {
+                case 'real-intro':
+                    scrollTo(0,briefIntroHeight);
+                    break;
+                case 'detail':
+                case 'contact':
+                    scrollTo(0,briefIntroHeight+realIntroHeight+detailHeight+contactHeight-document.body.clientHeight);
+                default:
+
+            };
+            return false;
+        })
+    }
     document.getElementById('navoption-mobile').addEventListener('click',slide);
 }
