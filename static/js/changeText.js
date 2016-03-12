@@ -172,6 +172,7 @@ function changeText(){
         findText();
         writeContent(true);
         }else{
+            enterControl = true;
             document.getElementById("btn").innerHTML = "填写完该项才能进行下一项哦";
             setTimeout(function(){
                 document.getElementById("btn").innerHTML = "enter";
