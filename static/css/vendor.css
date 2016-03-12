@@ -32,7 +32,7 @@ body{font-family:Courier;font-size:.125rem;	line-height: .5rem;}
 
 #main{;width:100%;border-top:1px solid #838383;z-index:0;-webkit-transition:bottom .2s linear;transition:bottom .2s linear;top:.3rem;bottom:0;padding:.1rem}#main #foreground-layer{position:fixed;top:0;left:0;z-index:9;pointer-events:none}
 
-#action-bar{display:block;position:fixed;left:0;bottom:0;width:0;height:0;opacity:0;background-image:url(../img/actionbar-bg.png);background-repeat:repeat-x;background-size:contain;z-index:1;-webkit-transition:opacity .2s linear;transition:opacity .2s linear}
+#action-bar{display:block;position:fixed;left:0;bottom:0;width:0;height:0;opacity:0;z-index:1;-webkit-transition:opacity .2s linear;transition:opacity .2s linear}
 
 #action-bar.show{width:100%;opacity:1;height:.45rem}
 
