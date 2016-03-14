@@ -1,4 +1,9 @@
 
+window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+    || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame
+    || function (fn) { setTimeout(fn, 1000 / 60); };
+
+
 var slide=function(){
   var ele=document.getElementById("optionslide");
   if(ele.clientHeight==205){
@@ -8,6 +13,28 @@ var slide=function(){
     ele.style.height='205px'
   }
 }
+
+var elBrief = document.getElementById("brief-intro");
+var elWrapper = document.getElementById("wrapper");
+var elMagic = document.getElementsByClassName("magic");
+var bodyWidth = 999999;
+window.onresize = function () {
+    var currentWidth = document.body.offsetWidth;
+    if (((bodyWidth == 999999) || (bodyWidth > 460)) && (currentWidth <= 460)) {
+        // elContact.innerHTML = elContact.innerHTML.replace("，", "<br>");
+        elMagic[0].classList.toggle("small");
+        elMagic[1].classList.toggle("small");
+    }
+    else if ((bodyWidth <= 460) && (currentWidth > 460)) {
+        // elContact.innerHTML = elContact.innerHTML.replace("<br>", "，");
+        elMagic[0].classList.toggle("small");
+        elMagic[1].classList.toggle("small");
+    }
+    bodyWidth = currentWidth;
+
+    elBrief.style.paddingTop = (document.body.offsetHeight - elWrapper.offsetHeight - 60) / 2 + "px";
+};
+
 var inityScrollY;
 window.onscroll=function(){
     var scrollTop = window.scrollY;
@@ -15,7 +42,7 @@ window.onscroll=function(){
     var realIntroHeight = document.getElementById('real-intro').clientHeight;
     var detailHeight = document.getElementById('detail').clientHeight;
     var contactHeight = document.getElementById('contact');
-    if (scrollTop>=300) {
+    if (scrollTop>=100) {
         document.getElementById('left').classList.add('fadeInLeft');
         document.getElementById('right').classList.add('fadeInRight');
 
@@ -32,7 +59,7 @@ window.onscroll=function(){
         }
     }
     inityScrollY = scrollTop;
-    if (briefIntroHeight+realIntroHeight+detailHeight<document.body.clientHeight+scrollTop) {
+    if (briefIntroHeight+realIntroHeight+100<document.body.clientHeight+scrollTop) {
         document.getElementById('date').classList.add('fadeInUp');
         setTimeout(function(){
             document.getElementById('place').classList.add('fadeInUp');
@@ -45,28 +72,34 @@ window.onscroll=function(){
         },900);
     }
 }
-function scrollTo(x,y){
+function scrollToEx(x,y){
+    var scrollLeft = window.scrollX;
     var scrollTop = window.scrollY;
-    var distance = y - scrollTop;
-    console.log(distance/Math.abs(distance));
-    var interval = setInterval(function () {
-        var top = window.scrollY;
-        console.log(top);
-        console.log(y);
-        var step = (distance/Math.abs(distance))*10;
+    var stepLeft = (x - scrollLeft > 0) ? 30 : -30;
+    var stepTop = (y - scrollTop > 0) ? 30 : -30;
+    var isEndLeft = false;
+    var isEndTop = false;
 
-        window.scrollBy(0,step);
-        if (step>0) {
-            if (top>=y) {
-                clearInterval(interval);
-            }
-        }else if(step<0){
-            if (top<=y) {
-                clearInterval(interval);
-            }
+    function scroll() {
+        scrollLeft += stepLeft;
+        if ((x - scrollLeft) * stepLeft < 0) {
+            scrollLeft = x;
+            isEndLeft = true;
         }
 
-    }, 1);
+        scrollTop += stepTop;
+        if ((y - scrollTop) * stepTop < 0) {
+            scrollTop = y;
+            isEndTop = true;
+        }
+        
+        window.scrollTo(scrollLeft, scrollTop);
+        if (!isEndLeft || !isEndTop) {
+            window.requestAnimationFrame(scroll);
+        }
+    };
+
+    scroll();
 }
 window.onload = function(){
     var inityScrollY = window.scrollY;
@@ -82,14 +115,14 @@ window.onload = function(){
             console.log(partId);
             switch (partId) {
                 case 'brief-intro':
-                    scrollTo(0,0);
+                    scrollToEx(0,0);
                     break;
                 case 'real-intro':
-                    scrollTo(0,briefIntroHeight);
+                    scrollToEx(0,briefIntroHeight);
                     break;
                 case 'detail':
                 case 'contact':
-                    scrollTo(0,briefIntroHeight+realIntroHeight+detailHeight+contactHeight-document.body.clientHeight);
+                    scrollToEx(0,briefIntroHeight+realIntroHeight+detailHeight+contactHeight-document.body.clientHeight);
                     break;
                 default:
                     break;
@@ -98,4 +131,6 @@ window.onload = function(){
         })
     }
     document.getElementById('navoption-mobile').addEventListener('click',slide);
+
+    window.onresize();
 }
