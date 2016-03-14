@@ -14,51 +14,54 @@ var slide=function(){
   }
 }
 
-var elBrief = document.getElementById("brief-intro");
 var elWrapper = document.getElementById("wrapper");
-var elMagic = document.getElementsByClassName("magic");
+var elContact = document.getElementById("contact");
 var bodyWidth = 999999;
 window.onresize = function () {
     var currentWidth = document.body.offsetWidth;
     if (((bodyWidth == 999999) || (bodyWidth > 460)) && (currentWidth <= 460)) {
-        // elContact.innerHTML = elContact.innerHTML.replace("，", "<br>");
-        elMagic[0].classList.toggle("small");
-        elMagic[1].classList.toggle("small");
+        elContact.innerHTML = elContact.innerHTML.replace("，", "<br>");
     }
     else if ((bodyWidth <= 460) && (currentWidth > 460)) {
-        // elContact.innerHTML = elContact.innerHTML.replace("<br>", "，");
-        elMagic[0].classList.toggle("small");
-        elMagic[1].classList.toggle("small");
+        elContact.innerHTML = elContact.innerHTML.replace("<br>", "，");
     }
     bodyWidth = currentWidth;
 
-    elBrief.style.paddingTop = (document.body.offsetHeight - elWrapper.offsetHeight - 60) / 2 + "px";
+    elWrapper.style.top = (document.body.offsetHeight - elWrapper.offsetHeight - 60) / 2 + 60 + "px";
 };
 
 var inityScrollY;
+var timeInstance;
+var isAnimate1 = false;
 window.onscroll=function(){
     var scrollTop = window.scrollY;
     var briefIntroHeight = document.getElementById('brief-intro').clientHeight;
     var realIntroHeight = document.getElementById('real-intro').clientHeight;
     var detailHeight = document.getElementById('detail').clientHeight;
     var contactHeight = document.getElementById('contact');
-    if (scrollTop>=100) {
+    if (!isAnimate1 && (scrollTop>=100)) {
+        isAnimate1 = true;
         document.getElementById('left').classList.add('fadeInLeft');
         document.getElementById('right').classList.add('fadeInRight');
-
-    }else{
-
     }
-    if(scrollTop>inityScrollY){
-        document.getElementsByClassName('navbar')[0].classList.remove('fadeInDown');
-        document.getElementsByClassName('navbar')[0].classList.add('fadeOutUp');
-    }else if(scrollTop<inityScrollY){
-        if (document.getElementsByClassName('navbar')[0].classList.contains('fadeOutUp')) {
-            document.getElementsByClassName('navbar')[0].classList.remove('fadeOutUp');
-            document.getElementsByClassName('navbar')[0].classList.add('fadeInDown');
+
+    if (timeInstance) {
+        clearTimeout(timeInstance);
+    }
+    timeInstance = setTimeout(function () {
+        if(scrollTop>inityScrollY){
+            document.getElementsByClassName('navbar')[0].classList.remove('fadeInDown');
+            document.getElementsByClassName('navbar')[0].classList.add('fadeOutUp');
+        }else if(scrollTop<inityScrollY){
+            if (document.getElementsByClassName('navbar')[0].classList.contains('fadeOutUp')) {
+                document.getElementsByClassName('navbar')[0].classList.remove('fadeOutUp');
+                document.getElementsByClassName('navbar')[0].classList.add('fadeInDown');
+            }
         }
-    }
-    inityScrollY = scrollTop;
+        timeInstance = undefined;
+        inityScrollY = scrollTop;
+    }, 100);
+
     if (briefIntroHeight+realIntroHeight+100<document.body.clientHeight+scrollTop) {
         document.getElementById('date').classList.add('fadeInUp');
         setTimeout(function(){
@@ -102,6 +105,9 @@ function scrollToEx(x,y){
     scroll();
 }
 window.onload = function(){
+    window.onresize();
+    window.onscroll();
+
     var inityScrollY = window.scrollY;
     var topoptionA = document.getElementsByClassName('topopA');
     for (var i = 0; i < topoptionA.length; i++) {
@@ -131,6 +137,4 @@ window.onload = function(){
         })
     }
     document.getElementById('navoption-mobile').addEventListener('click',slide);
-
-    window.onresize();
 }

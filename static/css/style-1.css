@@ -116,6 +116,9 @@ a{
   position: absolute;
   z-index: -1;
 }
+#wrapper {
+  position: relative;
+}
 #topic{
   width:70%;
   margin:  0 auto;
@@ -312,9 +315,12 @@ float: left;
   display: block;
 }
 .fadein{
-  animation:fadein 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count:1;
+  -webkit-animation:fadein 1s;
+          animation:fadein 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-iteration-count:1;
+          animation-iteration-count:1;
   -webkit-animation:fadein 1s;
   -webkit-animation-fill-mode: forwards;
   -webkit-animation-iteration-count:1;
@@ -475,21 +481,13 @@ float: left;
 @keyframes fadein{
   0%{
     opacity:0;
-    transform:translate(0px);
+    -webkit-transform:translate(0px);
+            transform:translate(0px);
   }
   100%{
     opacity:1;
-    transform:translate(-20px);
-  }
-}
-@-o-keyframes fadein{
-  0%{
-    opacity:0;
-    -o-transform:translate(0px);
-  }
-  100%{
-    opacity:1;
-    -o-transform:translate(-20px);
+    -webkit-transform:translate(-20px);
+            transform:translate(-20px);
   }
 }
 @-webkit-keyframes fadein{
@@ -500,26 +498,6 @@ float: left;
   100%{
     opacity:1;
     -webkit-transform:translate(-20px);
-  }
-}
-@-moz-keyframes fadein{
-  0%{
-    opacity:0;
-    -moz-transform:translate(0px);
-  }
-  100%{
-    opacity:1;
-    -moz-transform:translate(-20px);
-  }
-}
-@-ms-keyframes fadein{
-  0%{
-    opacity:0;
-    -ms-transform:translate(0px);
-  }
-  100%{
-    opacity:1;
-    -ms-transform:translate(-20px);
   }
 }
 
@@ -613,14 +591,25 @@ float: left;
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
 
   to {
     opacity: 1;
     -webkit-transform: none;
-    transform: none;
+            transform: none;
+  }
+}
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
   }
 }
 
