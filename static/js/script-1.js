@@ -20,10 +20,10 @@ var bodyWidth = 999999;
 window.onresize = function () {
     var currentWidth = document.body.offsetWidth;
     if (((bodyWidth == 999999) || (bodyWidth > 460)) && (currentWidth <= 460)) {
-        elContact.innerHTML = elContact.innerHTML.replace("，", "<br>");
+        elContact.innerHTML = elContact.innerHTML.replace(/，/g, "<br>");
     }
     else if ((bodyWidth <= 460) && (currentWidth > 460)) {
-        elContact.innerHTML = elContact.innerHTML.replace("<br>", "，");
+        elContact.innerHTML = elContact.innerHTML.replace(/<br>/g, "，");
     }
     bodyWidth = currentWidth;
 
