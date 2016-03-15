@@ -23,24 +23,26 @@
             if( n == 0){//简介1
 
                   addDiv(null,null);
-            }else if( n == 1){//简介2
+            }else if (n == 1) {
+				addDiv(null,null);
+            }
+			else if( n == 2){//简介2
                   addDiv(null,null);
-            }else if( n == 2){//请求姓名
+            }else if( n == 3){//请求姓名
                 addDiv("div_name","name");
 
-            }else if( n == 3){//请求电话
+            }else if( n == 4){//请求电话
 
                 addDiv("div_tel","tel");
 
-            }else if( n == 4){//请求院系
+            }else if( n == 5){//请求院系
                 addDiv("div_department","department");
-            }else if( n == 5){//请求年级
+            }else if( n == 6){//请求年级
                 addDiv("div_grade","grade");
-            }else if( n == 6){//请求邮箱
+            }else if( n == 7){//请求邮箱
                 addDiv("div_mail","mail");
             }
-            else if( n == 7){//请求简历
-
+            else if( n == 8){//请求简历
                 addTextarea("div_resume","resume");
             }
         message = document.getElementById('content').getElementsByClassName("message")[n];
@@ -48,11 +50,11 @@
 
         }
 
-    if(n<8){
+    if(n<9){
 
         initString = message.innerHTML;
         initString = initString.replace(/<SPAN.*$/gi,"");
-		
+
             var theChar = inputText.charAt(charIndex);
             //检测换行
             var nextFourChars = inputText.substr(charIndex,4);
@@ -86,8 +88,8 @@
 
         }else{
             enterControl = true;
-            if(n>1){
-                document.getElementsByClassName("inputBox")[n-2].style.display = "inline-block";
+            if(n>2){
+                document.getElementsByClassName("inputBox")[n-3].style.display = "inline-block";
             }
 
             addBlink();
@@ -100,10 +102,10 @@
                btn.style.display = "block";
 
                //提交
-               if( n == 7 ){
+               if( n == 8 ){
                    btn.innerHTML = "提交";
 
-                   n = 8;
+                   n = 9;
                }
            },150);
         }
@@ -129,10 +131,11 @@ window.onload = function(){
     }
 
     document.getElementById("btn").onclick = function(){
-        if(n<8){
+        if(n<9){
+			console.log(n);
             changeText();
         };
-        if(n == 8){
+        if(n == 9){
             ajaxRequest();
         };
     }
