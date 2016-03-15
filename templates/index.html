@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-control" content="no-cache">
+  <meta http-equiv="Cache" content="no-cache">
   <title>Made with Thimble</title>
   <link rel="stylesheet" href="/static/css/style-1.css">
 </head>
@@ -26,16 +30,17 @@
     </div>
   </div>
   <div id="brief-intro" name="main">
-      <img src="/static/img/back2.jpg" class='cover' alt="">
-    <p  id="topic">hack {<span>自强</span>}</p>
-    <p class="intro-p">
-        <span>
-            It’s amazing
-        </span>
-        <span> —自强hack day征集令</span>
-    </p>
-    <div class="intro-option">
-        <a href="/signup">我要报名</a>
+    <div id="wrapper">
+      <p  id="topic">hack {<span>自强</span>}</p>
+      <p class="intro-p">
+          <span>
+              It’s amazing
+          </span>
+          <span> —自强hack day征集令</span>
+      </p>
+      <div class="intro-option">
+          <a href="/signup">我要报名</a>
+      </div>
     </div>
   </div>
   <div id="real-intro" name="intro">
@@ -76,6 +81,7 @@ It's amazing so amazing.
 
 
   </div>
+  <pre id="debug" style="left: 20px; top: 200px; font-size: 13px; position: fixed; z-index: 999999;"></pre>
 </body>
 <script src="/static/js/script-1.js"></script>
 </html>
