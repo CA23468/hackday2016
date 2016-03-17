@@ -111,6 +111,17 @@
         }
 
 			window.scrollBy(0,300);
+			console.log("aaa");
+		    if (document.getElementsByClassName('tag').length) {
+
+		        var tags = document.getElementsByClassName('tag');
+		        console.log(tags);
+		        var taglength = tags.length;
+		        tags[taglength-1].onfocus = function(){
+		            console.log("papapa");
+		        }
+		        tags[taglength-1].focus();
+		    }
     }
 
 }
@@ -134,6 +145,7 @@ window.onload = function(){
         if(n<9){
 			console.log(n);
             changeText();
+
         };
         if(n == 9){
             ajaxRequest();
