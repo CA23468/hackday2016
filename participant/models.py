@@ -54,7 +54,7 @@ class Participant(models.Model):
         participants = Participant.objects.all()
         template = get_template('list.html')
         html = template.render(Context({ 'participants': participants }))
-        msg = EmailMultiAlternatives('hackday报名列表', '', 'hackday2016@sina.com', [ '295532814@qq.com' ])
+        msg = EmailMultiAlternatives('hackday报名列表', '', 'hackday2016@sina.com', [ '295532814@qq.com, CA23468@gmail.com' ])
         msg.attach_alternative(html, 'text/html')
         msg.send()
 
