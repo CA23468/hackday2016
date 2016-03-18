@@ -25,3 +25,8 @@ def signup(request):
     else:
         result['message'] = 'method not support'
         return JsonResponse(result, status = 405)
+
+def list(request):
+    # participants = Participant.objects.all()
+    # Participant.send()
+    # return render_to_response('list.html', locals())

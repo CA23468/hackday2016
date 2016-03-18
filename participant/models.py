@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.template import Context
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
 
 import re
+import threading
 
 re_tel = re.compile('^(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$')
 re_mail = re.compile('^[^\._-][\w\.-]+@([A-Za-z0-9]+\.)+[A-Za-z]+$')
@@ -44,6 +48,19 @@ class Participant(models.Model):
             participant = Participant(name = data['name'], grade = data['grade'], department = data['department'],
                 tel = data['tel'], mail = data['mail'], resume = data['resume'])
             participant.save()
+
+            thread = threading.Thread(target = Participant.send)
+            thread.setDaemon(True)
+            thread.start()
+
+    @staticmethod
+    def send():
+        participants = Participant.objects.all()
+        template = get_template('list.html')
+        html = template.render(Context({ 'participants': participants }))
+        msg = EmailMultiAlternatives('hackday报名列表', '', 'hackday2016@sina.com', [ '295532814@qq.com' ])
+        msg.attach_alternative(html, 'text/html')
+        msg.send()
 
 
 class Team(models.Model):

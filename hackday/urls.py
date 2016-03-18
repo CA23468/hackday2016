@@ -10,6 +10,7 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'hackday.views.index'),
+    
     # url(r'^signup/', 'hackday.views.index'),
     url(r'^vote/', include('vote.urls')),
     url(r'^participant/', include('participant.urls')),

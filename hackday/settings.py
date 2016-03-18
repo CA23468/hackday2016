@@ -99,6 +99,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_HOST = 'smtp.sina.com.cn'
+EMAIL_HOST_USER = 'hackday2016@sina.com'
+EMAIL_HOST_PASSWORD = 'hhh233'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
