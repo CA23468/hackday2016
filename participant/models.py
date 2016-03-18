@@ -49,10 +49,6 @@ class Participant(models.Model):
                 tel = data['tel'], mail = data['mail'], resume = data['resume'])
             participant.save()
 
-            thread = threading.Thread(target = Participant.send)
-            thread.setDaemon(True)
-            thread.start()
-
     @staticmethod
     def send():
         participants = Participant.objects.all()
@@ -61,7 +57,6 @@ class Participant(models.Model):
         msg = EmailMultiAlternatives('hackday报名列表', '', 'hackday2016@sina.com', [ '295532814@qq.com' ])
         msg.attach_alternative(html, 'text/html')
         msg.send()
-
 
 class Team(models.Model):
     name = models.CharField(u'队名', max_length = 40)

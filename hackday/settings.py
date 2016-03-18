@@ -108,10 +108,9 @@ EMAIL_HOST_PASSWORD = 'hhh233'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )

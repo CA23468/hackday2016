@@ -27,6 +27,8 @@ def signup(request):
         return JsonResponse(result, status = 405)
 
 def list(request):
-    # participants = Participant.objects.all()
-    # Participant.send()
-    # return render_to_response('list.html', locals())
+    try:
+        Participant.send()
+        return JsonResponse({ 'Success': True }, status = 200)
+    except:
+        return JsonResponse({ 'Success': False }, status = 422)
