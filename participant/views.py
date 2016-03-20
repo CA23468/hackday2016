@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, render_to_response
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
