@@ -141,8 +141,13 @@ function addBlink(){
                 success: function () {
                     document.getElementById("btn").innerHTML = "提交成功";
                 },
-                error: function () {
-                    document.getElementById("btn").innerHTML = "提交失败";
+                error: function (data) {
+                    if(data['success']==false){
+                        if(data['message'] === 'already sign up'){
+                            document.getElementById("btn").innerHTML = "已报名成功";
+                        }
+                    }
+                    
                 },
             });
 		}else{
