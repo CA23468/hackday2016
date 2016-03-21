@@ -142,11 +142,11 @@ function addBlink(){
                     document.getElementById("btn").innerHTML = "提交成功";
                 },
                 error: function (data) {
-                    if(data['success']==false){
-                        if(data['message'] === 'already sign up'){
+                    console.log(data);
+                        if(data['data']['message'] === 'already sign up'){
                             document.getElementById("btn").innerHTML = "已报名成功";
                         }
-                    }
+                    
                     
                 },
             });
