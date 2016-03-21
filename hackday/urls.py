@@ -8,9 +8,9 @@ urlpatterns = [
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'hackday.views.index'),
-    
+
     # url(r'^signup/', 'hackday.views.index'),
     url(r'^vote/', include('vote.urls')),
     url(r'^participant/', include('participant.urls')),
