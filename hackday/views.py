@@ -1,15 +1,11 @@
 from django.shortcuts import render, render_to_response
-from django.template.context_processors import csrf
+from django.core.mail import send_mail
 
 import re
 
 # Create your views here.
 def index(request):
-    context = {}
-    context.update(csrf(request))
-    return render_to_response('hackday.html', context)
+    return render_to_response('hackday.html', {})
 
 def showPage(request):
-    context = {};
-    context.update(csrf(request))
-    return render_to_response('index.html', context)
+    return render_to_response('index.html', {})
