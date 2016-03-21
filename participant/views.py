@@ -19,21 +19,22 @@ LOG_FILE = os.path.join(BASE_DIR, LOG_FILE_NAME)
 
 # Create your views here.
 def log(data, error):
-    if not os.path.exists(LOG_PATH):
-        os.makedirs(LOG_PATH)
+    # if not os.path.exists(LOG_PATH):
+    #     os.makedirs(LOG_PATH)
 
-    f = open(LOG_FILE, 'a')
-    f.write('\n\n')
-    f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S\n\n"))
+    log_string = '\n\n'
+    log_string += datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S\n\n")
     if data is not None:
         keys = [ 'name', 'tel', 'mail', 'department', 'grade', 'resume' ]
         for key in keys:
             value = (data.has_key(key) and data[key]) or ''
-            f.write('%-20s %s\n' % (key, value))
+            log_string += '%-20s %s\n' % (key, value)
     else:
-        f.write('data is None\n')
-    f.write('\n')
-    f.write('%-20s %s\n\n' % ('error_message', error or 'None'))
+        log_string += 'data is None\n'
+    log_string += '\n%-20s %s\n\n' % ('error_message', error or 'None')
+
+    f = open(LOG_FILE, 'a')
+    f.write(log_string.encode('utf-8'))
     f.close()
 
 def signup(request):

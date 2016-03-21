@@ -146,8 +146,8 @@ function addBlink(){
                         if(data['data']['message'] === 'already sign up'){
                             document.getElementById("btn").innerHTML = "已报名成功";
                         }
-                    
-                    
+
+
                 },
             });
 		}else{
