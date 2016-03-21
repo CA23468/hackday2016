@@ -33,21 +33,24 @@ class Participant(models.Model):
 
         form = ParticipantForm(raw_data)
         if not form.is_valid():
-            return 'argument error'
+            return 'argument error', None
 
         data = form.cleaned_data
         if re_tel.match(data['tel']) == None:
-            return 'tel invalid'
+            return 'tel invalid', data
         if re_mail.match(data['mail']) == None:
-            return 'mail invalid'
+            return 'mail invalid', data
 
         try:
             participant = Participant.objects.get(name = data['name'], tel = data['tel'])
-            return 'already sign up'
+            return 'already sign up', data
         except Participant.DoesNotExist:
             participant = Participant(name = data['name'], grade = data['grade'], department = data['department'],
                 tel = data['tel'], mail = data['mail'], resume = data['resume'])
             participant.save()
+            return None, data
+
+        return 'other error', data
 
     @staticmethod
     def send():

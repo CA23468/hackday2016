@@ -9,8 +9,33 @@ from models import Participant, Team
 from form import ParticipantForm
 
 import re
+import os
+import datetime
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_PATH = '/var/log/hackday2016/'
+LOG_FILE_NAME = 'log.txt'
+LOG_FILE = os.path.join(BASE_DIR, LOG_FILE_NAME)
 
 # Create your views here.
+def log(data, error):
+    if not os.path.exists(LOG_PATH):
+        os.makedirs(LOG_PATH)
+
+    f = open(LOG_FILE, 'a')
+    f.write('\n\n')
+    f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S\n\n"))
+    if data is not None:
+        keys = [ 'name', 'tel', 'mail', 'department', 'grade', 'resume' ]
+        for key in keys:
+            value = (data.has_key(key) and data[key]) or ''
+            f.write('%-20s %s\n' % (key, value))
+    else:
+        f.write('data is None\n')
+    f.write('\n')
+    f.write('%-20s %s\n\n' % ('error_message', error or 'None'))
+    f.close()
+
 def signup(request):
     result = {
         'success': False,
@@ -18,15 +43,17 @@ def signup(request):
     }
 
     if request.method == 'POST':
-        error_message = Participant.signup(request.POST)
+        error_message, data = Participant.signup(request.POST)
         if error_message == None:
             result['success'] = True
             result['message'] = 'operation success'
             return JsonResponse(result, status = 200)
         else:
+            log(data, error_message)
             result['message'] = error_message
             return JsonResponse(result, status = 422)
     else:
+        log(None, 'method %s not support' % request.method)
         result['message'] = 'method not support'
         return JsonResponse(result, status = 405)
 
